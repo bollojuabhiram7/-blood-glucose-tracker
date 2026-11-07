@@ -1,0 +1,925 @@
+/* Sweety dashboard refresh — centered layout
+   Visual layer only; API and state logic remain unchanged */
+
+/* =========================================
+   GLOBAL DASHBOARD
+========================================= */
+
+.dashboard-shell {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  background:
+    radial-gradient(ellipse at 12% 12%, #e2fbf6 0, transparent 32%),
+    linear-gradient(135deg, #f4fbfc 0%, #f8fbff 55%, #eefaf8 100%);
+  color: #102a43;
+  font-family: "DM Sans", Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.dashboard-shell * {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.dashboard-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  width: 100%;
+  background: rgba(255, 255, 255, .92) !important;
+  border-bottom: 1px solid #dcefeb !important;
+  box-shadow: 0 5px 22px rgba(15, 80, 80, .07) !important;
+  backdrop-filter: blur(14px);
+}
+
+.dashboard-header > div {
+  width: 100%;
+  max-width: 1500px !important;
+  height: 78px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: clamp(20px, 4vw, 64px) !important;
+  padding-right: clamp(20px, 4vw, 64px) !important;
+}
+
+.dashboard-header .bg-teal-700 {
+  background: linear-gradient(145deg, #10b99c, #007b70) !important;
+  border-radius: 15px !important;
+  box-shadow: 0 7px 16px #0b94852e;
+}
+
+.dashboard-header h1 {
+  font-size: 25px !important;
+  letter-spacing: -.7px;
+  color: #102a43 !important;
+}
+
+.dashboard-header button {
+  border-radius: 12px !important;
+  transition: .2s ease;
+}
+
+.dashboard-header button:hover {
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   MAIN DASHBOARD - CENTERED
+========================================= */
+
+.dashboard-main {
+  display: block;
+  width: calc(100% - 48px) !important;
+  max-width: 1420px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 38px 0 26px !important;
+}
+
+/* Keep all main sections aligned */
+.dashboard-main > * {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.dashboard-main > div:first-child {
+  width: 100%;
+  margin-bottom: 28px !important;
+  align-items: center;
+}
+
+.dashboard-main > div:first-child h2 {
+  font-size: clamp(30px, 3vw, 39px) !important;
+  font-weight: 800 !important;
+  letter-spacing: -1.2px;
+  color: #102a43 !important;
+}
+
+.dashboard-main > div:first-child p {
+  font-size: 16px !important;
+  margin-top: 7px !important;
+  color: #647b8d !important;
+}
+
+/* Add Reading button */
+
+.dashboard-main button.bg-teal-700,
+.dashboard-main button.mt-5 {
+  background: linear-gradient(110deg, #0db99a, #007d6c) !important;
+  box-shadow: 0 9px 20px rgba(0, 142, 119, .19);
+  border: 0 !important;
+  border-radius: 14px !important;
+  padding: 13px 22px !important;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.dashboard-main button.bg-teal-700:hover,
+.dashboard-main button.mt-5:hover {
+  background: linear-gradient(110deg, #079e86, #00685d) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 13px 24px rgba(0, 142, 119, .24);
+}
+
+/* =========================================
+   REPORT SECTION
+========================================= */
+
+.dashboard-report,
+.dashboard-history {
+  width: 100%;
+  background: rgba(255, 255, 255, .94) !important;
+  border: 1px solid #d9eeeb !important;
+  border-radius: 23px !important;
+  box-shadow: 0 12px 34px rgba(28, 91, 101, .075) !important;
+}
+
+.dashboard-report {
+  padding: 25px 27px !important;
+  margin-bottom: 24px !important;
+}
+
+.dashboard-report h3,
+.dashboard-history h3 {
+  font-size: 21px !important;
+  font-weight: 800 !important;
+  letter-spacing: -.45px;
+  color: #102a43 !important;
+}
+
+.dashboard-report p,
+.dashboard-history p {
+  color: #71869a !important;
+}
+
+.dashboard-report select,
+.dashboard-report input[type="date"] {
+  min-height: 49px !important;
+  border: 1px solid #d7e4ed !important;
+  border-radius: 13px !important;
+  background: #fff !important;
+  color: #17324a !important;
+  padding: 0 15px !important;
+  box-shadow: 0 2px 7px rgba(15, 60, 80, .025);
+}
+
+.dashboard-report input[type="date"] {
+  padding-left: 40px !important;
+}
+
+.dashboard-report button {
+  min-height: 49px;
+  border-radius: 13px !important;
+  font-weight: 700 !important;
+  padding: 0 18px !important;
+}
+
+.dashboard-report button.bg-slate-100 {
+  background: #e8faf6 !important;
+  color: #007d6c !important;
+}
+
+.dashboard-report > div:last-child {
+  margin-top: 19px !important;
+  padding-top: 16px !important;
+  border-color: #e9f1f3 !important;
+  color: #6c8195 !important;
+}
+
+/* =========================================
+   STATISTICS CARDS
+========================================= */
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px !important;
+  width: 100%;
+  margin-bottom: 27px !important;
+}
+
+.dashboard-stats > div {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  min-height: 145px;
+  padding: 23px !important;
+  border-radius: 21px !important;
+  border: 1px solid transparent !important;
+  box-shadow: 0 9px 24px rgba(24, 76, 98, .075) !important;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.dashboard-stats > div:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 28px rgba(24, 76, 98, .11) !important;
+}
+
+/* Highest reading */
+
+.dashboard-stats > div:nth-child(1) {
+  background: linear-gradient(135deg, #fff5f6, #ffe9ee) !important;
+  border-color: #ffdae2 !important;
+}
+
+/* Lowest reading */
+
+.dashboard-stats > div:nth-child(2) {
+  background: linear-gradient(135deg, #f0f9ff, #e0f3ff) !important;
+  border-color: #cceaff !important;
+}
+
+/* Average reading */
+
+.dashboard-stats > div:nth-child(3) {
+  background: linear-gradient(135deg, #faf5ff, #f0e8ff) !important;
+  border-color: #e7d8ff !important;
+}
+
+/* Total readings */
+
+.dashboard-stats > div:nth-child(4) {
+  background: linear-gradient(135deg, #effdfa, #ddf8f1) !important;
+  border-color: #c7f0e6 !important;
+}
+
+.dashboard-stats > div:after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 55px;
+  right: -22px;
+  bottom: -28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .38);
+  transform: rotate(-15deg);
+}
+
+.dashboard-stats > div p:first-child {
+  font-size: 14px !important;
+  font-weight: 700;
+  color: #526a80 !important;
+}
+
+.dashboard-stats > div h3 {
+  font-size: 31px !important;
+  font-weight: 800 !important;
+  letter-spacing: -.7px;
+  margin-top: 10px !important;
+  color: #102a43 !important;
+}
+
+.dashboard-stats > div h3 span {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #657d91 !important;
+}
+
+.dashboard-stats > div > div:last-child {
+  border-radius: 50% !important;
+  padding: 13px !important;
+  box-shadow: 0 5px 12px rgba(20, 50, 80, .06);
+}
+
+/* =========================================
+   READING HISTORY
+========================================= */
+
+.dashboard-history {
+  overflow: hidden !important;
+}
+
+.dashboard-history > div:first-child {
+  padding: 23px 26px !important;
+  border-color: #e8f0f3 !important;
+}
+
+.dashboard-history > div:first-child h3 {
+  font-size: 22px !important;
+}
+
+.dashboard-history > div:first-child > div:last-child {
+  background: #e4faf4;
+  color: #007d6c;
+  padding: 9px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+/* History table */
+
+.dashboard-history table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.dashboard-history thead {
+  background: #e3f8f4 !important;
+  color: #176b64 !important;
+}
+
+.dashboard-history th {
+  padding: 15px 22px !important;
+  font-size: 12px !important;
+  letter-spacing: .06em;
+}
+
+.dashboard-history td {
+  padding: 17px 22px !important;
+  border-bottom: 1px solid #edf2f5;
+  color: #304b61 !important;
+}
+
+.dashboard-history tbody tr {
+  transition: background .18s;
+}
+
+.dashboard-history tbody tr:hover {
+  background: #f3fbf9 !important;
+}
+
+.dashboard-history tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.dashboard-history td:nth-child(3) span:first-child {
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  color: #102a43 !important;
+}
+
+.dashboard-history td button {
+  border-radius: 10px !important;
+  transition: .18s;
+}
+
+.dashboard-history td button:hover {
+  background: #e5f8f4 !important;
+  color: #007d6c !important;
+}
+
+.dashboard-history td button:last-child:hover {
+  background: #fff0f1 !important;
+  color: #dc3545 !important;
+}
+
+.dashboard-history .bg-green-100 {
+  background: #dcfce7 !important;
+  color: #16803d !important;
+  border-radius: 999px !important;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.dashboard-main footer {
+  padding-top: 8px;
+  color: #8295a7 !important;
+  font-size: 13px !important;
+  text-align: center;
+}
+
+/* =========================================
+   MODAL
+========================================= */
+
+.dashboard-modal {
+  background: rgba(8, 30, 45, .52) !important;
+  backdrop-filter: blur(5px);
+}
+
+.dashboard-modal > div {
+  border: 1px solid #e1efed;
+  border-radius: 23px !important;
+  box-shadow: 0 24px 70px rgba(9, 47, 62, .25) !important;
+}
+
+.dashboard-modal input,
+.dashboard-modal select {
+  min-height: 48px;
+  border-radius: 12px !important;
+  border-color: #d8e6e9 !important;
+}
+
+.dashboard-modal form {
+  gap: 20px !important;
+}
+
+/* =========================================
+   TABLET RESPONSIVENESS
+========================================= */
+
+@media (max-width: 1100px) {
+  .dashboard-main {
+    width: calc(100% - 40px) !important;
+    max-width: 1420px !important;
+    padding-top: 30px !important;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px !important;
+  }
+
+  .dashboard-report {
+    padding: 21px !important;
+  }
+
+  .dashboard-stats > div {
+    min-height: 130px;
+    padding: 19px !important;
+  }
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+========================================= */
+
+@media (max-width: 640px) {
+  .dashboard-header > div {
+    height: 68px !important;
+    padding: 0 17px !important;
+  }
+
+  .dashboard-header h1 {
+    font-size: 22px !important;
+  }
+
+  .dashboard-main {
+    width: calc(100% - 28px) !important;
+    max-width: 100% !important;
+    padding: 25px 0 20px !important;
+  }
+
+  .dashboard-main > div:first-child {
+    gap: 17px !important;
+    margin-bottom: 22px !important;
+  }
+
+  .dashboard-main > div:first-child h2 {
+    font-size: 29px !important;
+  }
+
+  .dashboard-main > div:first-child > button {
+    width: 100%;
+  }
+
+  .dashboard-report {
+    padding: 18px !important;
+    border-radius: 18px !important;
+  }
+
+  .dashboard-report > div:first-child > div:last-child {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-report select,
+  .dashboard-report input[type="date"],
+  .dashboard-report button {
+    width: 100% !important;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 11px !important;
+  }
+
+  .dashboard-stats > div {
+    min-height: 125px;
+    padding: 15px !important;
+    border-radius: 16px !important;
+  }
+
+  .dashboard-stats > div h3 {
+    font-size: 25px !important;
+  }
+
+  .dashboard-stats > div > div:last-child {
+    padding: 9px !important;
+  }
+
+  .dashboard-history {
+    border-radius: 18px !important;
+    overflow-x: auto !important;
+  }
+
+  .dashboard-history > div:first-child {
+    padding: 18px !important;
+  }
+
+  .dashboard-history th,
+  .dashboard-history td {
+    padding: 14px 15px !important;
+  }
+
+  .dashboard-modal {
+    align-items: flex-end !important;
+    padding: 10px !important;
+  }
+
+  .dashboard-modal > div {
+    width: 100% !important;
+    max-height: 92vh;
+    overflow: auto;
+    border-radius: 22px 22px 12px 12px !important;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE DEVICES
+========================================= */
+
+@media (max-width: 380px) {
+  .dashboard-main {
+    width: calc(100% - 20px) !important;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dashboard-report,
+  .dashboard-history {
+    border-radius: 15px !important;
+  }
+}
+
+/* =========================================================
+   ADD / EDIT GLUCOSE READING MODAL
+   UI-only update. Form fields, validation and API handlers
+   in GlucoseDashboard.jsx remain unchanged.
+========================================================= */
+
+.dashboard-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 1000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 28px !important;
+  overflow-y: auto !important;
+  background: rgba(12, 31, 45, 0.58) !important;
+  backdrop-filter: blur(9px) saturate(115%) !important;
+  -webkit-backdrop-filter: blur(9px) saturate(115%) !important;
+}
+
+.dashboard-modal > div {
+  position: relative !important;
+  width: min(100%, 1050px) !important;
+  max-width: 1050px !important;
+  max-height: calc(100vh - 56px) !important;
+  overflow-y: auto !important;
+  margin: auto !important;
+  border: 1px solid rgba(208, 232, 229, 0.95) !important;
+  border-radius: 30px !important;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(177, 246, 235, 0.72), transparent 34%),
+    radial-gradient(ellipse at 0% 100%, rgba(199, 255, 241, 0.72), transparent 28%),
+    #ffffff !important;
+  box-shadow: 0 30px 90px rgba(5, 35, 49, 0.30) !important;
+  animation: sweetyModalIn 220ms ease-out both;
+}
+
+/* Modal heading area */
+.dashboard-modal > div > div:first-child {
+  position: relative !important;
+  min-height: 170px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding: 34px 100px 34px 218px !important;
+  border-bottom: 0 !important;
+  background:
+    radial-gradient(ellipse at 92% 0%, rgba(157, 239, 226, 0.55), transparent 42%),
+    linear-gradient(115deg, #f4fffd 0%, #f8fcff 55%, #e8fbf7 100%) !important;
+}
+
+.dashboard-modal > div > div:first-child::before {
+  content: "♥";
+  position: absolute;
+  left: 58px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 82px;
+  height: 82px;
+  transform: translateY(-50%);
+  border-radius: 23px;
+  color: #ffffff;
+  font-size: 38px;
+  font-weight: 700;
+  background: linear-gradient(145deg, #12b99b, #008273);
+  box-shadow: 0 10px 22px rgba(0, 130, 115, 0.22);
+}
+
+.dashboard-modal > div > div:first-child::after {
+  content: "";
+  position: absolute;
+  left: 171px;
+  top: 35px;
+  bottom: 35px;
+  width: 2px;
+  background: #b8d8d8;
+}
+
+.dashboard-modal > div > div:first-child h3 {
+  margin: 0 !important;
+  color: #102a43 !important;
+  font-size: clamp(25px, 3vw, 38px) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.9px !important;
+  font-weight: 800 !important;
+}
+
+.dashboard-modal > div > div:first-child p {
+  margin-top: 10px !important;
+  color: #64748b !important;
+  font-size: clamp(14px, 1.7vw, 20px) !important;
+  line-height: 1.45 !important;
+}
+
+.dashboard-modal > div > div:first-child button {
+  position: absolute !important;
+  top: 26px !important;
+  right: 28px !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 48px !important;
+  height: 48px !important;
+  padding: 0 !important;
+  border: 1px solid #e2edf0 !important;
+  border-radius: 50% !important;
+  color: #17324a !important;
+  background: #ffffff !important;
+  box-shadow: 0 5px 14px rgba(20, 60, 75, 0.09) !important;
+  transition: transform 180ms ease, background 180ms ease !important;
+}
+
+.dashboard-modal > div > div:first-child button:hover {
+  transform: rotate(90deg) !important;
+  background: #effaf7 !important;
+}
+
+/* Form layout: labels on the left, controls on the right */
+.dashboard-modal form {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 26px !important;
+  padding: 38px 58px 48px !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+}
+
+.dashboard-modal form > div:not(:last-child) {
+  display: grid !important;
+  grid-template-columns: minmax(220px, 0.78fr) minmax(0, 1.65fr) !important;
+  align-items: center !important;
+  column-gap: 28px !important;
+  min-width: 0 !important;
+}
+
+.dashboard-modal form label {
+  display: block !important;
+  margin: 0 !important;
+  color: #102a43 !important;
+  font-size: 19px !important;
+  line-height: 1.35 !important;
+  font-weight: 750 !important;
+}
+
+.dashboard-modal form input,
+.dashboard-modal form select {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 68px !important;
+  padding: 0 22px !important;
+  border: 1.5px solid #cbd9e6 !important;
+  border-radius: 17px !important;
+  outline: none !important;
+  color: #142d45 !important;
+  background: linear-gradient(110deg, #f1fbf9, #f8fbfd) !important;
+  box-shadow: 0 3px 9px rgba(19, 58, 78, 0.035) !important;
+  font-family: inherit !important;
+  font-size: 19px !important;
+  line-height: 1.4 !important;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease !important;
+}
+
+.dashboard-modal form input::placeholder {
+  color: #8292a8 !important;
+  opacity: 1 !important;
+}
+
+.dashboard-modal form input:focus,
+.dashboard-modal form select:focus {
+  border-color: #0aa68f !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(10, 166, 143, 0.12) !important;
+}
+
+.dashboard-modal form input[type="date"] {
+  color-scheme: light;
+}
+
+/* Helper text sits directly beneath the glucose input */
+.dashboard-modal form > div:nth-child(3) p {
+  grid-column: 2 !important;
+  margin: 9px 0 0 !important;
+  color: #718198 !important;
+  font-size: 15px !important;
+  line-height: 1.45 !important;
+}
+
+/* Validation message spans the form width when present */
+.dashboard-modal form > div.bg-red-50 {
+  grid-column: 1 / -1 !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 13px 16px !important;
+  border-radius: 13px !important;
+  line-height: 1.5 !important;
+}
+
+/* Footer actions */
+.dashboard-modal form > div:last-child {
+  grid-column: 1 / -1 !important;
+  display: grid !important;
+  grid-template-columns: 0.9fr 1.2fr !important;
+  gap: 20px !important;
+  padding-top: 22px !important;
+  margin-top: 8px !important;
+  border-top: 1px solid #edf2f5 !important;
+}
+
+.dashboard-modal form > div:last-child button {
+  min-height: 72px !important;
+  padding: 12px 24px !important;
+  border-radius: 999px !important;
+  font-size: 20px !important;
+  font-weight: 750 !important;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease !important;
+}
+
+.dashboard-modal form > div:last-child button:first-child {
+  border: 1.5px solid #cbd9e6 !important;
+  color: #17324a !important;
+  background: #ffffff !important;
+  box-shadow: 0 5px 13px rgba(20, 60, 75, 0.05) !important;
+}
+
+.dashboard-modal form > div:last-child button:first-child:hover {
+  background: #f4faf9 !important;
+  transform: translateY(-2px) !important;
+}
+
+.dashboard-modal form > div:last-child button:last-child {
+  border: 0 !important;
+  color: #ffffff !important;
+  background: linear-gradient(110deg, #12b99b, #007b70) !important;
+  box-shadow: 0 12px 22px rgba(0, 132, 113, 0.22) !important;
+}
+
+.dashboard-modal form > div:last-child button:last-child:hover:not(:disabled) {
+  background: linear-gradient(110deg, #0aa68d, #00695f) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 15px 26px rgba(0, 132, 113, 0.28) !important;
+}
+
+.dashboard-modal form > div:last-child button:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.65 !important;
+}
+
+@keyframes sweetyModalIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Tablet and mobile modal layout */
+@media (max-width: 760px) {
+  .dashboard-modal {
+    padding: 16px !important;
+  }
+
+  .dashboard-modal > div {
+    width: min(100%, 620px) !important;
+    max-height: calc(100vh - 32px) !important;
+    border-radius: 23px !important;
+  }
+
+  .dashboard-modal > div > div:first-child {
+    min-height: 132px !important;
+    padding: 25px 72px 25px 112px !important;
+  }
+
+  .dashboard-modal > div > div:first-child::before {
+    left: 24px;
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    font-size: 30px;
+  }
+
+  .dashboard-modal > div > div:first-child::after {
+    left: 100px;
+    top: 25px;
+    bottom: 25px;
+  }
+
+  .dashboard-modal > div > div:first-child button {
+    top: 16px !important;
+    right: 16px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .dashboard-modal form {
+    gap: 19px !important;
+    padding: 26px 25px 30px !important;
+  }
+
+  .dashboard-modal form > div:not(:last-child) {
+    grid-template-columns: 1fr !important;
+    gap: 9px !important;
+  }
+
+  .dashboard-modal form label {
+    font-size: 15px !important;
+  }
+
+  .dashboard-modal form input,
+  .dashboard-modal form select {
+    min-height: 56px !important;
+    padding: 0 15px !important;
+    border-radius: 13px !important;
+    font-size: 16px !important;
+  }
+
+  .dashboard-modal form > div:nth-child(3) p {
+    grid-column: 1 !important;
+    margin-top: 2px !important;
+    font-size: 13px !important;
+  }
+
+  .dashboard-modal form > div:last-child {
+    gap: 12px !important;
+    padding-top: 18px !important;
+  }
+
+  .dashboard-modal form > div:last-child button {
+    min-height: 58px !important;
+    padding: 10px 14px !important;
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .dashboard-modal {
+    padding: 10px !important;
+  }
+
+  .dashboard-modal > div {
+    max-height: calc(100vh - 20px) !important;
+    border-radius: 19px !important;
+  }
+
+  .dashboard-modal > div > div:first-child {
+    min-height: 112px !important;
+    padding: 22px 55px 22px 94px !important;
+  }
+
+  .dashboard-modal > div > div:first-child::before {
+    left: 17px;
+    width: 56px;
+    height: 56px;
+    font-size: 26px;
+  }
+
+  .dashboard-modal > div > div:first-child::after {
+    left: 84px;
+  }
+
+  .dashboard-modal > div > div:first-child h3 {
+    font-size: 21px !important;
+  }
+
+  .dashboard-modal > div > div:first-child p {
+    margin-top: 5px !important;
+    font-size: 12px !important;
+  }
+
+  .dashboard-modal form {
+    padding: 20px 17px 22px !important;
+  }
+
+  .dashboard-modal form > div:last-child {
+    grid-template-columns: 1fr !important;
+  }
+}
