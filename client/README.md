@@ -191,5 +191,61 @@ docker compose exec backend npm run db:seed
 - GitHub: [@bollojuabhiram7](https://github.com/bollojuabhiram7)
 
 ---
+**Demo Account and Sample Data**
+
+Sweety includes a database seed script that creates a demo account and populates the database with sample glucose readings.
+
+Demo credentials:
+
+Email: demo@sweety.local
+
+Password: SweetyDemo123!
+
+Seed features:
+
+Creates a demo user.
+
+Generates 28 sample glucose readings.
+
+Includes four daily time slots.
+
+Covers seven days of sample data.
+
+Uses Prisma upsert to prevent duplicate readings.
+
+Run the seed script with Docker:
+
+docker compose exec backend npm run db:seed
+
+Run locally:
+
+cd server
+npm run db:seed
+
+Note: Sample glucose values are illustrative demonstration data, not actual medical measurements or medical advice.
+
+
+
+## Notes
+
+### Assumptions
+- Each user has a private glucose reading history and can access only their own records.
+- Users can record glucose readings across four daily time slots: Morning, After Breakfast, After Lunch, and After Dinner.
+- A user can save only one reading per time slot per day.
+- The application uses sample glucose readings for demonstration purposes.
+- Glucose readings are stored as integer values, and authentication is handled using JWT.
+- The application is intended for tracking and monitoring purposes and does not provide medical diagnosis or treatment recommendations.
+
+### Future Improvements
+- Add interactive charts with weekly, monthly, and yearly glucose trends.
+- Implement configurable glucose range alerts and notifications.
+- Add PDF and CSV export options for glucose reports.
+- Introduce medication, meal, and exercise tracking.
+- Add reminders for recording glucose readings.
+- Improve the application with automated testing and expanded error handling.
+- Deploy the application to a cloud platform with production-ready monitoring and backups.
+
+
+
 
 *Sweety – Making daily blood glucose tracking simpler and more organized.*
